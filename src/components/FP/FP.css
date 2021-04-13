@@ -1,0 +1,36 @@
+#first-page{
+    background-color:white;
+    width:100%;
+    height:100%;
+}
+
+#avatar {
+    position: relative;
+    top:20em;
+}
+
+#avatar-img {
+    width: 20vw;
+    height: 20vh;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  
+  #first-page img {
+    vertical-align: middle;
+    border-style: none;
+    width: 50%;
+  }
+
+  #first-page h1 {
+    display: inline; 
+  }
+ 
+   
+  @media (max-width: 300px) {
+    #first-page h1 {
+    display: block;
+    }
+  }
+  
+  

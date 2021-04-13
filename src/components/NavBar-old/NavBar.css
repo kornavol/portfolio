@@ -1,0 +1,52 @@
+.bg_primary {
+    background-color: #1e283c;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 100;
+    padding: 30px 20px;
+}
+
+.sidebar span {
+    font-size: 36px;
+    display: block;
+    text-align: center;
+}
+
+.mt_60 {
+    margin-top: 60px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-decoration: none;
+}
+
+.socal_media ul li {
+    margin-bottom: 15px;
+}
+
+.socal_media ul li a, .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .srvicon, .contact_icon {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.line_double::before, .line_double::after, .progress-bar, .service_two .srv_icon, .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .lds-spinner div, .socal_media ul li a, #pp-nav li .active span, .pp-slidesNav .active span, .carousel-indicators .active, .contact_icon, .widget_title:before, .progress-bar, .page-item.active .page-link, .page-link:hover, .tags ul li a:hover {
+    background-color: #ffb32f !important;
+}
+
+.socal_media ul li a, .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .contact_icon, .contact_icon {
+    width: 50px;
+    height: 50px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 50%;
+    border: 5px solid;
+}
