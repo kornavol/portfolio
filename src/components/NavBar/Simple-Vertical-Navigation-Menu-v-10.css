@@ -1,33 +1,15 @@
-/* Simple-Vertical-Navigation-Menu-v-10.css */
-
-#ver-nav {
-  height: 100vh;
-  /* display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center; */
-  margin-top:15em;
-
-
-}
-
-.icons {
-  padding: 7px;
-}
-
-
 ul.vertical-nav-list {
   list-style-type: none;
   padding-left: 0px;
-  margin-left: 4;
+  margin-left: 0;
   font-family: 'Montserrat';
 }
 
-div.vertical-nav {
-  position: fixed;
-  /* display: block; */
+div {
+  position: absolute;
+  display: block;
   background-color: #ffffff;
-  /* margin-right: 90%; */
+  margin-right: 90%;
   height: 100%;
   z-index: 1;
 }
@@ -49,10 +31,6 @@ li.vnav-li {
   padding-bottom: 10px;
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
-  padding-right: 10px;
-  border-style: none;
-  font-size: 30px;
-  border-style: none;
 }
 
 a.vnav-link {
@@ -71,14 +49,5 @@ h4 {
 
 li.vnav-li:HOVER {
   box-shadow: 1px 1px 6px;
-}
-
-
-
-
-@media (max-width: 576px) {
-  div.vertical-nav {
-    display: none;
-  }
 }
 

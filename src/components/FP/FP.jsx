@@ -3,6 +3,8 @@ import './FP.css';
 import avatar from '../../assets/avatar2.png';
 import AOS from 'aos';
 
+
+
 // /import 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css';
 
 
@@ -10,12 +12,13 @@ export default function FP() {
 
   useEffect(() => {
     AOS.init({
-      duration : 2000
+     duration : 2000
     });
   }, []);
 
       return (
 <div id="first-page">
+  
   <div className="container" id="avatar">
     <div className="row justify-content-center align-items-center">
       <div className="col-sm-5 col-md-5 col-lg-5 col-xl-4 offset-sm-0 text-center text-md-center"><img data-aos="zoom-in" data-aos-duration={800} src={avatar} /></div>
