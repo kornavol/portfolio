@@ -21,7 +21,7 @@ export default function NavBar() {
       data-aos="fade-right"
       data-aos-duration={800}
       data-aos-delay={50}
-      className="vertical-nav"
+      className="vertical-nav text-left"
     >
       {/* <div style={{ margin: 0, marginTop: 6, marginLeft: 10 }}>
         <h6
@@ -59,7 +59,7 @@ Kornblum
         <li className="vnav-li">
           <a className="vnav-link" href="#">
             <i className="fa fa-tasks"/>
-            &nbsp;About
+            About
           </a>
         </li>
         <li className="vnav-li">
@@ -71,7 +71,7 @@ Kornblum
         <li className="vnav-li">
           <a className="vnav-link" href="#">
             <i className="fa fa-gift"/>
-            &nbsp;Project
+            Project
           </a>
         </li>
         <li className="vnav-li">

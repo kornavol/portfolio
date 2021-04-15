@@ -25,6 +25,7 @@ ul.vertical-nav-list {
 
 div.vertical-nav {
   position: fixed;
+  left: 5px;
   /* display: block; */
   background-color: #ffffff;
   /* margin-right: 90%; */
@@ -42,9 +43,9 @@ span.active-link {
 }
 
 li.vnav-li {
-  padding-top: 10px;
+  /* padding-top: 10px; */
   padding-left: 10px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-top: 1px solid grey;
@@ -57,7 +58,7 @@ li.vnav-li {
 
 a.vnav-link {
   color: grey;
-  font-size: 12px;
+  font-size: 17px;
 }
 
 a.active-link.vnav-link {
@@ -69,9 +70,9 @@ h4 {
   padding-left: 10px;
 }
 
-li.vnav-li:HOVER {
+/* li.vnav-li:HOVER {
   box-shadow: 1px 1px 6px;
-}
+} */
 
 
 

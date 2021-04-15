@@ -1,0 +1,60 @@
+section {
+    min-height: 100vh;
+    background-color: #18bc9c;
+  }
+  
+  #home h6 {
+    margin-top: 13px;
+  }
+
+  @media (min-width:992px) {
+    #mainNav {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      transition: padding-top .3s,padding-bottom .3s;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    #mainNav {
+      display: none;
+    }
+  }
+  
+  .navbar-brand.js-scroll-trigger {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #portfolio-filter {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  
+  #portfolio-filter span {
+    padding-top: 15px;
+  }
+  
+   
+  .img-fluid {
+    align-self: center;
+  }
+  
+  #portfolio-filter h1 {
+    font-size: 40px;
+    padding-top: 0px;
+    height: 37px;
+  }
+  
+  hr.star-dark:after, hr.star-light:after {
+    position: relative;
+    top: -.8em;
+    display: inline-block;
+    padding: 0 .25em;
+    content: "\f005";
+    font-family: FontAwesome;
+    font-size: 2em;
+  }
+  
+  
