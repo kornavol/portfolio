@@ -2,17 +2,11 @@
 
 #ver-nav {
   height: 100vh;
-  /* display: flex;
+  display: flex;
   flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center; */
-  margin-top:15em;
-
-
-}
-
-.icons {
-  padding: 7px;
+  flex-direction: column;
+  justify-content: center; 
+  /* top:15em; */
 }
 
 
@@ -27,7 +21,7 @@ div.vertical-nav {
   position: fixed;
   left: 5px;
   /* display: block; */
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   /* margin-right: 90%; */
   height: 100%;
   z-index: 1;
@@ -57,7 +51,7 @@ li.vnav-li {
 }
 
 a.vnav-link {
-  color: grey;
+  color: #2c3e50;;
   font-size: 17px;
 }
 
@@ -65,20 +59,12 @@ a.active-link.vnav-link {
   color: white;
 }
 
-h4 {
-  color: white;
-  padding-left: 10px;
-}
-
 /* li.vnav-li:HOVER {
   box-shadow: 1px 1px 6px;
 } */
 
-
-
-
-@media (max-width: 576px) {
-  div.vertical-nav {
+@media (max-width: 767px) {
+  #ver-nav {
     display: none;
   }
 }

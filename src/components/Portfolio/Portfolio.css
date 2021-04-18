@@ -1,0 +1,39 @@
+#portfolio-filter {
+    width: auto;
+    height: auto;
+    border-width: 0;
+    color: rgb(24,188,156);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* margin-right:7px ; */
+    margin-left: auto;
+    margin-right: auto;
+
+    
+  }
+
+#portfolio a {
+    margin-bottom: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    display: block;
+    max-width: 25rem;
+    margin-bottom: 15px;
+}
+
+.portfolio-item-caption {
+    transition: all .5s ease;
+    opacity: 0;
+    background-color: rgba(24,188,156,.9);
+}
+
+.portfolio-item-caption:hover {
+    opacity: 1;
+}
+
+.modal-open, .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}

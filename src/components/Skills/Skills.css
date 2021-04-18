@@ -1,0 +1,43 @@
+section {
+    display: flex;
+    flex-wrap: nowrap;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+#skills span {
+  padding-top: 15px;
+  margin-top: 0;
+  padding: 5;
+  color: rgb(59,154,219);
+}
+
+#skills-filter {
+    width: auto;
+    height: auto;
+    border-width: 0;
+    color: rgb(24,188,156);
+    margin-bottom: 20px;
+    margin-right:7px ;
+
+}
+
+/* .col-sm-6.col-md-3.col-xl-2 {
+  align-items: center;
+} */
+
+/* not sure does it works */
+skills .img {
+  align-self: center;
+}
+
+hr.star-dark:after,
+hr.star-light:after {
+  position: relative;
+  top: -0.8em;
+  display: inline-block;
+  padding: 0 0.25em;
+  content: "\f005";
+  font-family: FontAwesome;
+  font-size: 2em;
+}

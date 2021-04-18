@@ -1,0 +1,26 @@
+#about {
+    /* background-color: #18bc9c; */
+    background-color: tomato;
+    display: flex;
+    flex-wrap: nowrap;
+    /* justify-content: center; */
+    align-items: center;
+    
+    
+  }
+
+  /* .container {
+      margin-left: 70px !important;
+  } */
+  
+  hr.star-dark:after, hr.star-light:after {
+    position: relative;
+    top: -.8em;
+    display: inline-block;
+    padding: 0 .25em;
+    content: "\f005";
+    font-family: FontAwesome;
+    font-size: 2em;
+  }
+  
+  

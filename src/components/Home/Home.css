@@ -1,60 +1,78 @@
-section {
-    min-height: 100vh;
-    background-color: #18bc9c;
-  }
-  
-  #home h6 {
-    margin-top: 13px;
-  }
+#home {
+  background-color: #18bc9c;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center; 
+  /* padding: 6rem 0; */
+}
 
-  @media (min-width:992px) {
-    #mainNav {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-      transition: padding-top .3s,padding-bottom .3s;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    #mainNav {
-      display: none;
-    }
-  }
-  
-  .navbar-brand.js-scroll-trigger {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  #portfolio-filter {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
-  
-  #portfolio-filter span {
-    padding-top: 15px;
-  }
-  
-   
-  .img-fluid {
-    align-self: center;
-  }
-  
-  #portfolio-filter h1 {
-    font-size: 40px;
-    padding-top: 0px;
-    height: 37px;
-  }
-  
-  hr.star-dark:after, hr.star-light:after {
-    position: relative;
-    top: -.8em;
-    display: inline-block;
-    padding: 0 .25em;
-    content: "\f005";
-    font-family: FontAwesome;
-    font-size: 2em;
-  }
-  
-  
+#home h1 {
+  padding-top: 0;
+  height: 37;
+  font-size: 40;
+}
+
+#home h2 {
+  height: 48;
+}
+
+#home h6 {
+  margin-top: 13px;
+}
+
+
+#home img {
+  vertical-align: middle;
+  align-self: center;
+}
+
+#home ul {
+  margin-top: 29px;
+}
+
+
+#portfolio-filter {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#portfolio-filter span {
+  padding-top: 15px;
+}
+
+#portfolio-filter h1 {
+  font-size: 40px;
+  padding-top: 0px;
+  height: 37px;
+}
+
+hr.star-dark:after,
+hr.star-light:after {
+  position: relative;
+  top: -0.8em;
+  display: inline-block;
+  padding: 0 0.25em;
+  content: "\f005";
+  font-family: FontAwesome;
+  font-size: 2em;
+}
+
+hr {
+  margin-bottom: 18px;
+  border-color: #fff;
+  max-width: 15rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  box-sizing: content-box;
+  overflow: visible;
+  /* border-top: 1px solid rgba(0,0,0,.1); */
+  display: block;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}

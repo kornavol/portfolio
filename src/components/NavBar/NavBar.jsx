@@ -1,11 +1,9 @@
 import {React, useEffect} from "react";
-// import "./Navbar-Fixed-Side.css";
-// import "./Simple-Vertical-Navigation-Menu-v-10.css";
 import "./NavBar.css";
 
-import logo from "../../assets/logo_small.png";
 import { AiFillHome } from "react-icons/ai";
 import AOS from 'aos';
+// import {NavLink} from 'react-router-dom';
 
 
 export default function NavBar() {
@@ -21,7 +19,7 @@ export default function NavBar() {
       data-aos="fade-right"
       data-aos-duration={800}
       data-aos-delay={50}
-      className="vertical-nav text-left"
+      className="vertical-nav text-left "
     >
       {/* <div style={{ margin: 0, marginTop: 6, marginLeft: 10 }}>
         <h6
@@ -47,37 +45,44 @@ export default function NavBar() {
 Kornblum
         </h6>
       </div> */}
-      <ul className="vertical-nav-list">
+      <ul  id="ver-nav" className="vertical-nav-list ">
         <li
           className="vnav-li"
         >
-          <a className="vnav-link" href="#">
+          <a className="vnav-link" href="/home">
             {/* <AiFillHome/>  */}
-             First
+             home
           </a>
         </li>
+        
+        {/* <NavLink 
+      exact
+      to ="/about" 
+      className ="nav-item"
+      activeClassName="active"
+        >about</NavLink> */}
         <li className="vnav-li">
-          <a className="vnav-link" href="#">
+          <a className="vnav-link" href="/about">
             <i className="fa fa-tasks"/>
-            About
+            about
           </a>
         </li>
         <li className="vnav-li">
-          <a className="vnav-link" href="#">
+          <a className="vnav-link" href="/skills">
             <i className="fa fa-list-alt"/>
-            Skills
+            skills
           </a>
         </li>
         <li className="vnav-li">
-          <a className="vnav-link" href="#">
+          <a className="vnav-link" href="/portfolio">
             <i className="fa fa-gift"/>
-            Project
+            projects
           </a>
         </li>
         <li className="vnav-li">
-          <a className="vnav-link" href="#">
+          <a className="vnav-link" href="/contacts">
             <i className="fa fa-money"/>
-            Contact
+            contact
           </a>
         </li>
       </ul>
