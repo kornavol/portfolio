@@ -1,13 +1,23 @@
-import React from "react";
+import {React,  useEffect} from 'react'
+import AOS from 'aos';
+import "aos/dist/aos.css";
+
 import "./Home.css";
 import avatar from "../../assets/avatar.png";
 import { FaGithub, FaLinkedinIn, FaXing } from "react-icons/fa"
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({
+     duration : 3000
+    });
+  }, []);
+
   return (
     <section id="home" className="text-center text-white masthead">
       <img
         className="img-fluid d-block mx-auto bounce animated mb-5"
+        data-aos="zoom-out" data-aos-duration={800}
         src={avatar}
       />
       <div>

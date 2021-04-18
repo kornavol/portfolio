@@ -78,7 +78,7 @@ const Portfolio = () => {
     projects = portfolioDB.map((item) => <Project item={item} popUp = {popUpOpener} />);
   } else {
     let a = portfolioDB.filter((item) => item.group == selector);
-    projects = a.map((item) => <Project item={item} />);
+    projects = a.map((item) => <Project item={item} popUp = {popUpOpener} />);
   }
 
   function popUpOpener (e) {
@@ -111,7 +111,7 @@ const Portfolio = () => {
           <option value={"js"}>JavaScript</option>
           <option value={"react"}>React</option>
         </select>
-        <div className="row">{projects}</div>
+        <div className="row text-center justify-content-center align-items-center">{projects}</div>
       </div>
       {prjPage}
     </section>
