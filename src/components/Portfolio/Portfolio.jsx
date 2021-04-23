@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect, useRef } from "react";
 
 import "./Portfolio.css";
 import cabin from "../../assets/portfolio/cabin.png";
@@ -67,11 +67,60 @@ const Portfolio = () => {
       gitLink: "",
       group: "react",
     },
+    
   ];
 
   const [selector, setSelector] = useState("all");
   const [prjPage, setPrjPage] = useState(null);
+  const [compHeight, setCompHeight] = useState(undefined);
   let projects = [];
+
+  const el = useRef(null)
+
+  console.log(compHeight);
+  
+  useEffect(() => {
+    console.log(window.innerHeight);
+    console.log(el.current);
+    console.log(el.current.clientHeight);
+    console.log(el.current.offsetHeight);
+    setCompHeight(el.current.clientHeight)
+    
+  if (compHeight > window.innerHeight) {
+    window.addEventListener("scroll", onScroll);
+    
+  } else {
+    window.addEventListener("wheel", onWheel);
+
+  }
+  
+     return () => {
+       window.removeEventListener("scroll", onScroll);
+       window.removeEventListener("wheel", onWheel);
+      };
+  }, );
+
+
+  const onWheel = (e) => {
+    if (e.deltaY < 0) {
+      console.log(e.deltaY, "up");
+    } else {
+      console.log(e.deltaY, "down");
+    }
+  };
+
+  const onScroll = (e) => {
+    document.addEventListener("scroll", (e) => {
+      console.log(e);
+      let element = e.target.lastChild;
+      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+        console.log("on the bottom");
+      }
+    });
+  };
+
+
+
 
   /*TO-DO.  Scratch, needs be changEd */
   if (selector === "all") {
@@ -93,10 +142,26 @@ const Portfolio = () => {
     setPrjPage(null)
   }
 
+  function handleScroll(e){
+    e.stopPropagation();
+
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) { 
+      console.log(e.target);
+        console.log('scrollHeight', e.target.scrollHeight);
+        console.log('scrollTop', e.target.scrollTop);
+        console.log('clientHeight', e.target.clientHeight);
+
+
+    }
+  }
+
   return (
-    <section id="portfolio" className="portfolio">
+    /* why I see wrong amount of ref in section */
+    <section ref={el}   id="portfolio" className="portfolio" onScroll={()=>console.log('scroll')} >
+      {/* {compHeight} */}
       <div className="container">
-        <h2 className="text-uppercase text-center text-secondary">Portfolio</h2>
+        <h2  className="text-uppercase text-center text-secondary">Portfolio</h2>
         {/* <hr className="star-dark mb-5" /> */}
         <select
           id="portfolio-filter"

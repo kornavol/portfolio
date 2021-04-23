@@ -7,11 +7,14 @@ import AOS from 'aos';
 
 
 export default function NavBar() {
+  
   useEffect(() => {
     AOS.init({
      duration : 1000
     });
   }, []);
+
+  
 
   return (
     <div
