@@ -80,7 +80,9 @@ const Portfolio = ({ el }) => {
   const [selector, setSelector] = useState("all");
   const [prjPage, setPrjPage] = useState(null);
 
-  /*TO-DO.  Scratch, needs be changEd */
+  /*TO-DO.  
+  Scratch, needs be changed
+  Figure out a problem with comparison (not working with ===) */
   /* Rendering skills and logic selector  */
   let projects = [];
   if (selector === "all") {
@@ -88,7 +90,7 @@ const Portfolio = ({ el }) => {
       <Project key={item.id} item={item} popUp={popUpOpener} />
     ));
   } else {
-    let a = portfolioDB.filter((item) => item.group === selector);
+    let a = portfolioDB.filter((item) => item.group == selector);
     projects = a.map((item) => (
       <Project key={item.id} item={item} popUp={popUpOpener} />
     ));
@@ -96,7 +98,7 @@ const Portfolio = ({ el }) => {
 
   function popUpOpener(e) {
     let currentId = e.currentTarget.id;
-    let b = portfolioDB.filter((item) => item.id === currentId);
+    let b = portfolioDB.filter((item) => item.id == currentId);
     let c = b[0];
     setPrjPage(<ProjectPage item={c} unmPopUp={unmPopUp} />);
   }
