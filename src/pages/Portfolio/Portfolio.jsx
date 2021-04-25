@@ -1,4 +1,5 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Portfolio.css";
 import cabin from "../../assets/portfolio/cabin.png";
@@ -8,10 +9,11 @@ import game from "../../assets/portfolio/game.png";
 import safe from "../../assets/portfolio/safe.png";
 import submarine from "../../assets/portfolio/submarine.png";
 
-import Project from "./Project.jsx";
-import ProjectPage from './ProjectPage.jsx';
+import Project from "../../components/Portfolio/Project.jsx";
+import ProjectPage from "../../components/Portfolio/ProjectPage.jsx";
+import { transHight } from "../../actions";
 
-const Portfolio = () => {
+const Portfolio = ({ el }) => {
   const portfolioDB = [
     {
       id: 1,
@@ -67,101 +69,53 @@ const Portfolio = () => {
       gitLink: "",
       group: "react",
     },
-    
   ];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(transHight(el.current.clientHeight));
+  });
 
   const [selector, setSelector] = useState("all");
   const [prjPage, setPrjPage] = useState(null);
-  const [compHeight, setCompHeight] = useState(undefined);
-  let projects = [];
-
-  const el = useRef(null)
-
-  console.log(compHeight);
-  
-  useEffect(() => {
-    console.log(window.innerHeight);
-    console.log(el.current);
-    console.log(el.current.clientHeight);
-    console.log(el.current.offsetHeight);
-    setCompHeight(el.current.clientHeight)
-    
-  if (compHeight > window.innerHeight) {
-    window.addEventListener("scroll", onScroll);
-    
-  } else {
-    window.addEventListener("wheel", onWheel);
-
-  }
-  
-     return () => {
-       window.removeEventListener("scroll", onScroll);
-       window.removeEventListener("wheel", onWheel);
-      };
-  }, );
-
-
-  const onWheel = (e) => {
-    if (e.deltaY < 0) {
-      console.log(e.deltaY, "up");
-    } else {
-      console.log(e.deltaY, "down");
-    }
-  };
-
-  const onScroll = (e) => {
-    document.addEventListener("scroll", (e) => {
-      console.log(e);
-      let element = e.target.lastChild;
-      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-        console.log("on the bottom");
-      }
-    });
-  };
-
-
-
 
   /*TO-DO.  Scratch, needs be changEd */
+  /* Rendering skills and logic selector  */
+  let projects = [];
   if (selector === "all") {
-    projects = portfolioDB.map((item) => <Project item={item} popUp = {popUpOpener} />);
+    projects = portfolioDB.map((item) => (
+      <Project key={item.id} item={item} popUp={popUpOpener} />
+    ));
   } else {
-    let a = portfolioDB.filter((item) => item.group == selector);
-    projects = a.map((item) => <Project item={item} popUp = {popUpOpener} />);
+    let a = portfolioDB.filter((item) => item.group === selector);
+    projects = a.map((item) => (
+      <Project key={item.id} item={item} popUp={popUpOpener} />
+    ));
   }
 
-  function popUpOpener (e) {
+  function popUpOpener(e) {
     let currentId = e.currentTarget.id;
-    let b = portfolioDB.filter((item) => item.id == currentId);
+    let b = portfolioDB.filter((item) => item.id === currentId);
     let c = b[0];
-    setPrjPage( <ProjectPage item={c} unmPopUp = {unmPopUp}/>);
-
+    setPrjPage(<ProjectPage item={c} unmPopUp={unmPopUp} />);
   }
 
   function unmPopUp() {
-    setPrjPage(null)
-  }
-
-  function handleScroll(e){
-    e.stopPropagation();
-
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) { 
-      console.log(e.target);
-        console.log('scrollHeight', e.target.scrollHeight);
-        console.log('scrollTop', e.target.scrollTop);
-        console.log('clientHeight', e.target.clientHeight);
-
-
-    }
+    setPrjPage(null);
   }
 
   return (
     /* why I see wrong amount of ref in section */
-    <section ref={el}   id="portfolio" className="portfolio" onScroll={()=>console.log('scroll')} >
+    <section
+      ref={el}
+      id="portfolio"
+      className="portfolio"
+      onScroll={() => console.log("scroll")}
+    >
       {/* {compHeight} */}
       <div className="container">
-        <h2  className="text-uppercase text-center text-secondary">Portfolio</h2>
+        <h2 className="text-uppercase text-center text-secondary">Portfolio</h2>
         {/* <hr className="star-dark mb-5" /> */}
         <select
           id="portfolio-filter"
@@ -176,7 +130,9 @@ const Portfolio = () => {
           <option value={"js"}>JavaScript</option>
           <option value={"react"}>React</option>
         </select>
-        <div className="row text-center justify-content-center align-items-center">{projects}</div>
+        <div className="row text-center justify-content-center align-items-center">
+          {projects}
+        </div>
       </div>
       {prjPage}
     </section>

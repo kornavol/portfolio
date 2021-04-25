@@ -1,4 +1,5 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Skills.css";
 import bootstrap from "../../assets/skill-icons/bootstrap.png";
@@ -9,9 +10,10 @@ import node from "../../assets/skill-icons/node.png";
 import react from "../../assets/skill-icons/react.png";
 import saas from "../../assets/skill-icons/saas.png";
 
-import Skill from "./Skill";
+import Skill from "../../components/Skill";
+import { transHight } from "../../actions";
 
-const Skills = () => {
+const Skills = ({ el }) => {
   const skillsArr = [
     {
       title: "HTML",
@@ -55,19 +57,26 @@ const Skills = () => {
     },
   ];
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(transHight(el.current.clientHeight));
+  });
+
+  /*TO-DO.  Scratch, needs be changd */
+  /* Rendering skills and logic selector  */
   const [selector, setSelector] = useState("all");
   let skill = [];
 
-  /*TO-DO.  Scratch, needs be changEd */
   if (selector === "all") {
     skill = skillsArr.map((item) => <Skill item={item} />);
   } else {
-    let a = skillsArr.filter((item) => item.group == selector);
+    let a = skillsArr.filter((item) => item.group === selector);
     skill = a.map((item) => <Skill item={item} />);
   }
 
   return (
-    <section id="skills" className="skills">
+    <section ref={el} id="skills" className="skills">
       <div className="container">
         <h2 className="text-uppercase text-center text-secondary">skills</h2>
         {/* <hr className="star-dark mb-5" /> */}

@@ -1,20 +1,56 @@
-import {React, useEffect} from "react";
+import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
+
 import "./NavBar.css";
+import AOS from "aos";
 
-import { AiFillHome } from "react-icons/ai";
-import AOS from 'aos';
-// import {NavLink} from 'react-router-dom';
-
+import { belowPage } from "../../actions";
 
 export default function NavBar() {
-  
-  useEffect(() => {
-    AOS.init({
-     duration : 1000
-    });
-  }, []);
+  const dispatch = useDispatch();
 
-  
+  /* Rendering menu */
+  const navArr = useSelector((state) => state.nav);
+  const navDeck = [...navArr];
+  const navItems = navDeck.map((item) => (
+    <li key={item} className="vnav-li ">
+      {/* <NavLink to={"/" + item} > */}
+      <a className="vnav-link" href={"/" + item}>
+        {item}
+      </a>
+      {/* </NavLink> */}
+    </li>
+  ));
+
+  /* Send prev. and next  menu item (for scrolling) */
+  let location = useLocation();
+  let nextIndex = undefined;
+  let prevIndex = undefined;
+
+  /* case when pass = '/' */
+  if (location.pathname.length > 1) {
+    location = location.pathname.substring(1);
+    nextIndex = navDeck.indexOf(location);
+    prevIndex = nextIndex - 1;
+    nextIndex = nextIndex + 1;
+  } else {
+    nextIndex = 1;
+    prevIndex = navDeck.length - 1;
+    console.log(navDeck.length);
+  }
+
+  if (nextIndex == navDeck.length) {
+    nextIndex = 0;
+  }
+
+  if (prevIndex < 0) {
+    prevIndex = navDeck.length - 1;
+  }
+
+  const nextPage = navDeck[nextIndex];
+  const prevPage = navDeck[prevIndex];
+  dispatch(belowPage(prevPage, nextPage));
 
   return (
     <div
@@ -24,70 +60,8 @@ export default function NavBar() {
       data-aos-delay={50}
       className="vertical-nav text-left "
     >
-      {/* <div style={{ margin: 0, marginTop: 6, marginLeft: 10 }}>
-        <h6
-          className="text-center"
-          id="logo"
-          style={{
-            color: "var(--green)",
-            fontSize: 13,
-            fontFamily: "Montserrat, sans-serif",
-            margin: 0,
-          }}
-        >Andreas
-        </h6>
-        <h6
-          className="text-center"
-          id="logo"
-          style={{
-            color: "var(--green)",
-            fontSize: 13,
-            fontFamily: "Montserrat, sans-serif",
-          }}
-        >
-Kornblum
-        </h6>
-      </div> */}
-      <ul  id="ver-nav" className="vertical-nav-list ">
-        <li
-          className="vnav-li"
-        >
-          <a className="vnav-link" href="/home">
-            {/* <AiFillHome/>  */}
-             home
-          </a>
-        </li>
-        
-        {/* <NavLink 
-      exact
-      to ="/about" 
-      className ="nav-item"
-      activeClassName="active"
-        >about</NavLink> */}
-        <li className="vnav-li">
-          <a className="vnav-link" href="/about">
-            <i className="fa fa-tasks"/>
-            about
-          </a>
-        </li>
-        <li className="vnav-li">
-          <a className="vnav-link" href="/skills">
-            <i className="fa fa-list-alt"/>
-            skills
-          </a>
-        </li>
-        <li className="vnav-li">
-          <a className="vnav-link" href="/portfolio">
-            <i className="fa fa-gift"/>
-            projects
-          </a>
-        </li>
-        <li className="vnav-li">
-          <a className="vnav-link" href="/contacts">
-            <i className="fa fa-money"/>
-            contact
-          </a>
-        </li>
+      <ul id="ver-nav" className="vertical-nav-list ">
+        {navItems}
       </ul>
     </div>
   );

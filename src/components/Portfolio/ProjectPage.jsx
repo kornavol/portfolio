@@ -1,5 +1,5 @@
 import React from "react";
-import "./Portfolio.css";
+import "../../pages/Portfolio/Portfolio.css";
 
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"
 

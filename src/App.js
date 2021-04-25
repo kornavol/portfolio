@@ -1,71 +1,83 @@
 import "./App.css";
-import { useEffect } from "react";
+import "aos/dist/aos.css";
+import AOS from "aos";
+
+import { useRef, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import FP from "./components/FP/FP.jsx";
-import Home from "./components/Home/Home.jsx";
+import { useDispatch, useSelector } from "react-redux";
+
+import Home from "./pages/Home/Home.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import NavBarVer from "./components/NavBar/NavBarVer.jsx";
-import About from "./components/About/About.jsx";
-import Skills from "./components/Skills/Skills.jsx";
-import Portfolio from "./components/Portfolio/Portfolio.jsx";
+import About from "./pages/About/About.jsx";
+import Skills from "./pages/Skills/Skills.jsx";
+import Portfolio from "./pages/Portfolio/Portfolio.jsx";
 import Contacts from "./components/Contacts/Contacts.jsx";
-import { FaWindows } from "react-icons/fa";
-
+import { toBelowPage, toUpperPage } from "./actions";
 
 function App() {
-  
+  const dispatch = useDispatch();
+  const el = useRef(
+    null
+  ); /* reference to each section in order to get a rendered height   */
+  const getHight = useSelector(
+    (state) => state.sectionSelector
+  ); /* getting height of current section */
 
-  // useEffect(() => {
-  //   onScroll();
-  //   onWheel();    
-  //     return removeEventListener() 
-    
-  // }, []);
+  /* This aphorism is necessary, because I can get current height only after rendering and for applying, needs update state */
+  const [compHeight, setCompHeight] = useState(undefined);
+  const changeHeight = () => setCompHeight(getHight);
 
-  // const onScroll = () => {
-  //   document.addEventListener("scroll", (e) => {
-  //     console.log(e);
-  //     isScroll = true;
-  //     let element = e.target.lastChild;
-  //     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-  //       console.log("on the bottom");
-  //     }
-  //   });
-  //   console.log(isScroll);
-  // };
+  const winHeight = window.innerHeight;
 
-  const onWheel = () => {
-    window.addEventListener("wheel", (e) => {
-      console.log(e);
-      if (e.deltaY < 0) {
-        console.log(e.deltaY, "up");
-      } else {
-        console.log(e.deltaY, "down");
+  /* once for all animation, duration have to be equal the most long animation  */
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", changeHeight);
+    if (compHeight > winHeight) {
+      window.addEventListener("scroll", onScroll);
+    } else {
+      window.addEventListener("wheel", onWheel);
+    }
+
+    changeHeight();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", changeHeight);
+    };
+  }, [compHeight]);
+
+  function onWheel(e) {
+    if (e.deltaY < 0) {
+      console.log(e.deltaY, "up");
+      setTimeout(() => {
+        dispatch(toUpperPage());
+      }, 300);
+    } else {
+      console.log(e.deltaY, "down");
+      setTimeout(() => {
+        dispatch(toBelowPage());
+      }, 300);
+    }
+  }
+
+  function onScroll(e) {
+    document.addEventListener("scroll", (e) => {
+      let element = e.target.lastChild;
+      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+        setTimeout(() => {
+          dispatch(toBelowPage());
+        }, 300);
       }
     });
-  };
-
-  // useEffect(() => {
-  //   window.addEventListener("wheel", (e) => {
-  //     e.preventDefault()
-  //     let element = e.target
-  //     if (e.deltaY < 0) {
-  //       console.log(e.deltaY, "up");
-
-  //     } else if(element.scrollHeight - element.scrollTop === element.clientHeight) {
-  //       console.log(e.deltaY, "down");
-
-  //       // console.log(element)
-  //       // console.log('scrollHeight', element.scrollHeight);
-  //       // console.log('scrollTop', element.scrollTop);
-  //       // console.log('clientHeight', element.clientHeight);
-
-  //       console.log(window.innerHeight);
-  //       console.log(document.documentElement.offsetHeight);
-  //       // console.log(element.clientHeight );
-  //     }
-  //   });
-  // }, []);
+  }
 
   return (
     <div>
@@ -74,22 +86,34 @@ function App() {
         <NavBarVer />
         <Switch>
           <Route path="/home">
-            <Home />
+            <Home
+              el={el}
+            />
           </Route>
           <Route path="/about">
-            <About />
+            <About
+              el={el}
+            />
           </Route>
           <Route path="/skills">
-            <Skills />
+            <Skills
+              el={el}
+            />
           </Route>
-          <Route path="/portfolio">
-            <Portfolio />
+          <Route path="/projects">
+            <Portfolio
+              el={el}
+            />
           </Route>
-          <Route path="/contacts">
-            <Contacts />
+          <Route path="/contact">
+            <Contacts
+              el={el}
+            />
           </Route>
           <Route path="/">
-            <Home />
+            <Home
+              el={el}
+            />
           </Route>
         </Switch>
       </Router>

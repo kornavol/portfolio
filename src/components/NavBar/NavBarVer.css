@@ -7,7 +7,7 @@
 }
 
 #navbarResponsive {
-  display: none;
+  /* display: none; */
 }
 
 #logoVer {
@@ -24,6 +24,7 @@
 #navBtnHor {
   background-color: #18bc9c;
 }
+
 
 @media (min-width: 992px) {
   #mainNav {

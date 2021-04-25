@@ -1,9 +1,19 @@
-import React from "react";
+import { React, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import "./About.css";
 
-const About = () => {
+import { transHight } from "../../actions";
+
+const About = ({ el }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(transHight(el.current.clientHeight));
+  });
+
   return (
-    <section className="text-white mb-0" id="about">
+    <section ref={el} className="text-white mb-0" id="about">
       <div className="container">
         <h2 className="text-uppercase text-center text-white mb-5">About</h2>
         {/* <hr className="star-light mb-5" /> */}

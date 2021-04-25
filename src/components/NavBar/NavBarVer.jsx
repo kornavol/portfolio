@@ -1,28 +1,46 @@
-import React from "react";
+import { React, useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./NavBarVer.css";
-
-import { FaBars } from "react-icons/fa"
-import Button from 'react-bootstrap/Button';
-
+import { FaBars } from "react-icons/fa";
+import Button from "react-bootstrap/Button";
 
 const NavBarver = () => {
+  const [sidebar, setSidebar] = useState(
+    false
+  ); /* conditianal renderin class which shows a hides menu items */
+
+  /* renderin menu */
+  const navArr = useSelector((state) => state.nav);
+  const navDeck = [...navArr];
+  const navItems = navDeck.map((item) => (
+    <li key={item} className="nav-item mx-0 mx-lg-1 ">
+      <a
+        className="nav-link py-3 px-0 px-lg-3 rounded  text-white text-uppercase"
+        href={"/" + item}
+      >
+        {item}
+      </a>
+    </li>
+  ));
+
   return (
     <nav
-      className="navbar navbar-light navbar-expand-lg fixed-top  text-uppercase"
       id="mainNav"
+      className="navbar navbar-light navbar-expand-lg fixed-top  text-uppercase"
     >
       <div className="container">
         <Button
           id="navBtnHor"
           data-toggle="collapse"
-          data-target="#navbarResponsive"
+          target="#navbarResponsive"
           className="navbar-toggler text-white navbar-toggler-right text-uppercase rounded"
           aria-controls="navbarResponsive"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={() => setSidebar(!sidebar)}
         >
-          <FaBars/>
+          <FaBars />
         </Button>
         <a
           id="logoVer"
@@ -32,48 +50,15 @@ const NavBarver = () => {
         >
           Andreas Kornblum
         </a>
-        <div className=" navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav ml-auto">
-          <li className="nav-item mx-0 mx-lg-1">
-              <a
-                className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                href="/home"
-              >
-                Home
-              </a>
-            </li>
-            <li className="nav-item mx-0 mx-lg-1">
-              <a
-                className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                href="/about"
-              >
-                About
-              </a>
-            </li>
-            <li className="nav-item mx-0 mx-lg-1">
-              <a
-                className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                href="/portfolio"
-              >
-                Portfolio
-              </a>
-            </li>
-            <li className="nav-item mx-0 mx-lg-1">
-              <a
-                className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                href="/skills"
-              >
-                Skills
-              </a>
-            </li>
-            <li className="nav-item mx-0 mx-lg-1">
-              <a
-                className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                href="/contact"
-              >
-                Contact
-              </a>
-            </li>
+        <div id="navbarResponsive" className=" navbar-collapse">
+          <ul
+            className={
+              sidebar
+                ? "visible " + "navbar-nav ml-auto"
+                : "d-none " + "navbar-nav ml-auto"
+            }
+          >
+            {navItems}
           </ul>
         </div>
       </div>

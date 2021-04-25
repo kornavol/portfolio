@@ -1,46 +1,24 @@
 import { React, useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useDispatch } from "react-redux";
 
 import "./Home.css";
 import avatar from "../../assets/avatar.png";
 import { FaGithub, FaLinkedinIn, FaXing } from "react-icons/fa";
 
-const Home = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 3000,
-    });
-  }, []);
+import { transHight } from "../../actions";
 
-  const onWheel = (e) => {
-    if (e.deltaY < 0) {
-      console.log(e.deltaY, "up");
-    } else {
-      console.log(e.deltaY, "down");
-    }
-  };
+const Home = ({ el }) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    window.addEventListener("wheel", onWheel);
-     return () => {window.removeEventListener("wheel", onWheel)};
-  }, []);
-
-  const onScroll = () => {
-    document.addEventListener("scroll", (e) => {
-      console.log(e);
-      let element = e.target.lastChild;
-      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-        console.log("on the bottom");
-      }
-    });
-  };
+    dispatch(transHight(el.current.clientHeight));
+  });
 
   return (
     <section
+      ref={el}
       id="home"
       className="text-center text-white masthead"
-      // onWheel={() => console.log("scroll")}
     >
       <img
         className="img-fluid d-block mx-auto bounce animated mb-5"

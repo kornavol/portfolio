@@ -1,14 +1,20 @@
+## Links
+
 ## Stack
 
-React, Bootstrap
+React, Bootstrap, Redux
 
 ## Packages
 
 - react-icons
 - aos
 - react-router-dom
+- react-redux
+- redux
 
 ## To-Do
+
+- Переход осуществляется когда страница было проскроленна до конца + один wheel
 
 ### Menu
 
@@ -23,10 +29,6 @@ React, Bootstrap
 
 - переход между страницами в виде горизонтального слайдинга, когда пользователь скролит или нажимает на пункт меню
 - Размер страницы не меньше чем размер экрана по высоте
-- Переход осуществляется когда страница было проскроленна до концв
+- Переход осуществляется когда страница было проскроленна до конца + один wheel
 
 ## Issues
-
-- aos animation not working
-- strange working react-icons
-  - couldst add classnames
