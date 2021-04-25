@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/github.com/portfolio/static/css/main.eeeb5faf.chunk.css",
+    "main.js": "/github.com/portfolio/static/js/main.cadc63e2.chunk.js",
+    "main.js.map": "/github.com/portfolio/static/js/main.cadc63e2.chunk.js.map",
+    "runtime-main.js": "/github.com/portfolio/static/js/runtime-main.b61c8377.js",
+    "runtime-main.js.map": "/github.com/portfolio/static/js/runtime-main.b61c8377.js.map",
+    "static/css/2.e4e35064.chunk.css": "/github.com/portfolio/static/css/2.e4e35064.chunk.css",
+    "static/js/2.18ff82a1.chunk.js": "/github.com/portfolio/static/js/2.18ff82a1.chunk.js",
+    "static/js/2.18ff82a1.chunk.js.map": "/github.com/portfolio/static/js/2.18ff82a1.chunk.js.map",
+    "static/js/3.2e30eeac.chunk.js": "/github.com/portfolio/static/js/3.2e30eeac.chunk.js",
+    "static/js/3.2e30eeac.chunk.js.map": "/github.com/portfolio/static/js/3.2e30eeac.chunk.js.map",
+    "index.html": "/github.com/portfolio/index.html",
+    "static/css/2.e4e35064.chunk.css.map": "/github.com/portfolio/static/css/2.e4e35064.chunk.css.map",
+    "static/css/main.eeeb5faf.chunk.css.map": "/github.com/portfolio/static/css/main.eeeb5faf.chunk.css.map",
+    "static/js/2.18ff82a1.chunk.js.LICENSE.txt": "/github.com/portfolio/static/js/2.18ff82a1.chunk.js.LICENSE.txt",
+    "static/media/avatar.c40c5c78.png": "/github.com/portfolio/static/media/avatar.c40c5c78.png",
+    "static/media/bootstrap.f4fced17.png": "/github.com/portfolio/static/media/bootstrap.f4fced17.png",
+    "static/media/cabin.44173302.png": "/github.com/portfolio/static/media/cabin.44173302.png",
+    "static/media/cake.65544730.png": "/github.com/portfolio/static/media/cake.65544730.png",
+    "static/media/circus.494a4a91.png": "/github.com/portfolio/static/media/circus.494a4a91.png",
+    "static/media/game.a940b57a.png": "/github.com/portfolio/static/media/game.a940b57a.png",
+    "static/media/react.483edd20.png": "/github.com/portfolio/static/media/react.483edd20.png",
+    "static/media/saas.83fd10e2.png": "/github.com/portfolio/static/media/saas.83fd10e2.png",
+    "static/media/safe.01792c0b.png": "/github.com/portfolio/static/media/safe.01792c0b.png",
+    "static/media/submarine.48c9704c.png": "/github.com/portfolio/static/media/submarine.48c9704c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b61c8377.js",
+    "static/css/2.e4e35064.chunk.css",
+    "static/js/2.18ff82a1.chunk.js",
+    "static/css/main.eeeb5faf.chunk.css",
+    "static/js/main.cadc63e2.chunk.js"
+  ]
+}
