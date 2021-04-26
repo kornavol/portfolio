@@ -1,18 +1,18 @@
 ## Links
 
 <https://andreas-kornblum.herokuapp.com>
-
 <https://kornavol.github.io/portfolio/>
 
-## Stack
+## Description
+
+### Stack
 
 React, Bootstrap, Redux
 
-## Packages
+### Packages
 
 - react-icons
 - aos
-- react-router-dom
 - react-redux
 - redux
 
@@ -22,17 +22,28 @@ React, Bootstrap, Redux
 
 ### Menu
 
-- Merge css sheet
-- Add burger menu in horizontal mode. Which will be cover all screen and match with circles
-  - transition animation
-- Connection and tracking with current page
-  - highlight current item
-- Animation
+- transition animation for ver-nav
+- highlight item of current page
 
-### Pages
+### Navigation
 
-- переход между страницами в виде горизонтального слайдинга, когда пользователь скролит или нажимает на пункт меню
-- Размер страницы не меньше чем размер экрана по высоте
+- add transition on scroll-up
 - Переход осуществляется когда страница было проскроленна до конца + один wheel
 
+## Skills
+
+- change to drag version
+
 ## Issues
+
+- don't see bottom margin of hor-nav on mobile device
+
+## Bugs
+
+- prevent navigation scroling if pop-up window is activ
+
+## Testing
+
+Needs to test scroll navigation on:
+
+-

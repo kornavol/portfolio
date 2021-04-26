@@ -69,10 +69,10 @@ const Skills = ({ el }) => {
   let skill = [];
 
   if (selector === "all") {
-    skill = skillsArr.map((item) => <Skill item={item} />);
+    skill = skillsArr.map((item) => <Skill key={item.title} item={item} />);
   } else {
     let a = skillsArr.filter((item) => item.group === selector);
-    skill = a.map((item) => <Skill item={item} />);
+    skill = a.map((item) => <Skill key={item.title} item={item} />);
   }
 
   return (

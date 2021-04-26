@@ -1,11 +1,12 @@
 import { React, useState } from "react";
 import { useSelector } from "react-redux";
 
-import "./NavBarVer.css";
+import "./NavBarHor.css";
 import { FaBars } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 
 const NavBarver = () => {
+
   const [sidebar, setSidebar] = useState(
     false
   ); /* conditianal renderin class which shows a hides menu items */
@@ -26,7 +27,7 @@ const NavBarver = () => {
 
   return (
     <nav
-      id="mainNav"
+      id="hor-nav"
       className="navbar navbar-light navbar-expand-lg fixed-top  text-uppercase"
     >
       <div className="container">
@@ -45,7 +46,7 @@ const NavBarver = () => {
         <a
           id="logoVer"
           className="navbar-brand text-white "
-          href="#page-top"
+          href="/home"
           target="_top"
         >
           Andreas Kornblum

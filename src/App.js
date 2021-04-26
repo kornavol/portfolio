@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Home from "./pages/Home/Home.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
-import NavBarVer from "./components/NavBar/NavBarVer.jsx";
+import NavBarHor from "./components/NavBar/NavBarHor.jsx";
 import About from "./pages/About/About.jsx";
 import Skills from "./pages/Skills/Skills.jsx";
 import Portfolio from "./pages/Portfolio/Portfolio.jsx";
@@ -17,12 +17,11 @@ import { toBelowPage, toUpperPage } from "./actions";
 
 function App() {
   const dispatch = useDispatch();
-  const el = useRef(
-    null
-  ); /* reference to each section in order to get a rendered height   */
-  const getHight = useSelector(
-    (state) => state.sectionSelector
-  ); /* getting height of current section */
+  const el = useRef(null); //reference to each section in order to get a rendered height
+
+  let scrollTopRef = useRef(-1); // we can use everyting instead UNDEFINED. 
+  
+  const getHight = useSelector((state) => state.sectionSelector); // getting height of current section
 
   /* This aphorism is necessary, because I can get current height only after rendering and for applying, needs update state */
   const [compHeight, setCompHeight] = useState(undefined);
@@ -41,6 +40,7 @@ function App() {
     window.addEventListener("resize", changeHeight);
     if (compHeight > winHeight) {
       window.addEventListener("scroll", onScroll);
+      window.addEventListener("wheel", onWheelTop);
     } else {
       window.addEventListener("wheel", onWheel);
     }
@@ -51,6 +51,9 @@ function App() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("resize", changeHeight);
+      window.removeEventListener("wheel", onWheelTop);
+
+      // scrollTop = undefined;
     };
   }, [compHeight]);
 
@@ -68,52 +71,68 @@ function App() {
     }
   }
 
-  function onScroll(e) {
-    document.addEventListener("scroll", (e) => {
-      let element = e.target.lastChild;
-      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-        setTimeout(() => {
-          dispatch(toBelowPage());
-        }, 300);
-      }
-    });
+  function test(e) {
+    let element = e.target.lastChild;
+    scrollTopRef.current = element.scrollTop;
+    console.log("from ref", scrollTopRef);
+  }
+
+  async function onScroll(e) {
+    let element = e.target.lastChild;
+    // await setScrollTop('success');
+    // console.log('from state', scrollTop);
+
+    // scrollTopRef.current = element.scrollTop
+    // console.log('from ref', scrollTopRef);
+
+    await test(e);
+
+    /* default formula to understand that page on a bottom over scrolling */
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      setTimeout(() => {
+        dispatch(toBelowPage());
+      }, 300);
+    }
+    if (element.scrollTop === 0) {
+      console.log("on top");
+      setTimeout(() => {
+        dispatch(toUpperPage());
+      }, 300);
+    }
+  }
+
+
+  function onWheelTop(e) {
+    if (scrollTopRef.current == -1 && e.deltaY < 0) {
+      setTimeout(() => {
+        dispatch(toUpperPage());
+      }, 300);
+    }
   }
 
   return (
     <div>
       <Router basename={process.env.PUBLIC_URL}>
         <NavBar />
-        <NavBarVer />
+        <NavBarHor />
         <Switch>
           <Route path="/home">
-            <Home
-              el={el}
-            />
+            <Home el={el} />
           </Route>
           <Route path="/about">
-            <About
-              el={el}
-            />
+            <About el={el} />
           </Route>
           <Route path="/skills">
-            <Skills
-              el={el}
-            />
+            <Skills el={el} />
           </Route>
           <Route path="/projects">
-            <Portfolio
-              el={el}
-            />
+            <Portfolio el={el} />
           </Route>
           <Route path="/contact">
-            <Contacts
-              el={el}
-            />
+            <Contacts el={el} />
           </Route>
           <Route path="/">
-            <Home
-              el={el}
-            />
+            <Home el={el} />
           </Route>
         </Switch>
       </Router>
