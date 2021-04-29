@@ -1,6 +1,6 @@
 ## Links
 
-<https://andreas-kornblum.herokuapp.com>;
+<https://andreas-kornblum.herokuapp.com> <br />
 <https://kornavol.github.io/portfolio/>
 
 ## Description
