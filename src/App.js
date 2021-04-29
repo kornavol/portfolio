@@ -4,7 +4,7 @@ import AOS from "aos";
 
 import { useRef, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Home from "./pages/Home/Home.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -17,51 +17,26 @@ import { toBelowPage, toUpperPage } from "./actions";
 
 function App() {
   const dispatch = useDispatch();
+
   const elemHeight = useRef(-10); //reference to each section in order to get a rendered height
 
   let scrollTopRef = useRef(-1); // we can use everyting instead UNDEFINED.
   let scrollDownRef = useRef(false);
 
-  const getHight = useSelector((state) => state.sectionSelector); // getting height of current section
-
   /* This aphorism is necessary, because I can get current height only after rendering and for applying, needs update state */
   const [compHeight, setCompHeight] = useState(undefined);
-  const changeHeight = () => setCompHeight(getHight);
-
   const winHeight = window.innerHeight;
 
-  /* once for all animation, duration have to be equal the most long animation  */
-  useEffect(() => {
-    AOS.init({
-      duration: 2000,
-    });
-  }, []);
-
-  const fromChildChg = () => {
+  function fromChildChg() {
     setTimeout(() => {
       setCompHeight(elemHeight.current.clientHeight);
       console.log("elemHeight", elemHeight.current.clientHeight);
     }, 100);
-  };
+  }
 
-  useEffect(() => {
-    window.addEventListener("resize", changeHeight);
-
-    if (compHeight > winHeight) {
-      window.addEventListener("scroll", onScroll);
-      window.addEventListener("wheel", onWheelTop);
-    } else {
-      window.addEventListener("wheel", onWheel);
-    }
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", changeHeight);
-      window.removeEventListener("wheel", onWheelTop);
-
-      // scrollTop = undefined;
-    };
-  });
+  function changeHeight() {
+    setCompHeight(elemHeight.current.clientHeight);
+  }
 
   function onWheel(e) {
     if (e.deltaY < 0) {
@@ -81,7 +56,7 @@ function App() {
     let element = e.target.lastChild;
     // console.log("on Scroll is activ");
 
-    scrollTopRef.current = element.scrollTop; //  to fire a "onWheelTop" when scrollbar on a top, because in this case scroll event doesn't registred
+    scrollTopRef.current = element.scrollTop; //  to fire a "onWheelWthScroll" when scrollbar on a top, because in this case scroll event doesn't registred
 
     /* default formula to understand that page on a bottom over scrolling */
     /* 
@@ -100,7 +75,7 @@ function App() {
   }
 
   /*  mounitng with onScroll and makes a transfer ot next page. It works because I wanted to transfer after a second wheel turn during scroling   */
-  function onWheelTop(e) {
+  function onWheelWthScroll(e) {
     // console.log('second onWheel is activ');
     if (scrollTopRef.current == -1 && e.deltaY < 0) {
       setTimeout(() => {
@@ -113,6 +88,32 @@ function App() {
       }, 300);
     }
   }
+
+  /* once for all animation, duration have to be equal the most long animation  */
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", changeHeight);
+
+    if (compHeight > winHeight) {
+      window.addEventListener("scroll", onScroll);
+      window.addEventListener("wheel", onWheelWthScroll);
+    } else {
+      window.addEventListener("wheel", onWheel);
+    }
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", changeHeight);
+      window.removeEventListener("wheel", onWheelWthScroll);
+
+      // scrollTop = undefined;
+    };
+  });
 
   return (
     <div>
