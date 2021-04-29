@@ -7,45 +7,12 @@
 
 ### Version
 
-- UseRef as reference to am element whish is measuring
-- height of elelement whitch transfer through redux from current page to App
-- Wrong hight of element only in chrome
+The main problem with this version that Chrom gets a wrong height of the element. Probably it happens because of timing (chrome is slower than other browsers). 
+the measure of the element which over viewport occurs in coupla steps. 
+First transfering a height of the window and after in some time real height. In order to get the right value state of the app suppose to be updated AFTER the final step but in chrome it happens BEFORE
 
-### Packages
+- UseRef as a reference to an element which is measuring
+- height of element which transfers through redux from the current page to App
+- Wrong height of an element only in chrome
 
-- react-icons
-- aos
-- react-redux
-- redux
 
-## To-Do
-
-- Переход осуществляется когда страница было проскроленна до конца + один wheel
-
-### Menu
-
-- transition animation for ver-nav
-- highlight item of current page
-
-### Navigation
-
-- add transition on scroll-up
-- Переход осуществляется когда страница было проскроленна до конца + один wheel
-
-## Skills
-
-- change to drag version
-
-## Issues
-
-- don't see bottom margin of hor-nav on mobile device
-
-## Bugs
-
-- prevent navigation scroling if pop-up window is activ
-
-## Testing
-
-Needs to test scroll navigation on:
-
--
