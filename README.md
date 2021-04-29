@@ -1,10 +1,3 @@
-## Links
-
-<https://andreas-kornblum.herokuapp.com>;
-<https://kornavol.github.io/portfolio/>
-
-## Description
-
 ### Version
 
 The main problem with this version that Chrom gets a wrong height of the element. Probably it happens because of timing (chrome is slower than other browsers). 
