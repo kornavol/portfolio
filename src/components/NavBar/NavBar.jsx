@@ -1,6 +1,6 @@
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 import "./NavBar.css";
 import AOS from "aos";
@@ -14,12 +14,16 @@ export default function NavBar() {
   const navArr = useSelector((state) => state.nav);
   const navDeck = [...navArr];
   const navItems = navDeck.map((item) => (
-    <li key={item} className="vnav-li ">
-      {/* <NavLink to={"/" + item} > */}
-      <a className="vnav-link" href={"/" + item}>
-        {item}
-      </a>
-      {/* </NavLink> */}
+    <li key={item} className="vnav-li">
+      <div className="vnav-link">
+        <NavLink  to={"/" + item} >
+          {item}
+        </NavLink>
+      </div>
+{/* 
+      //  <a className="vnav-link" href={"/" + item}>
+      //     {item}
+      //   </a> */}
     </li>
   ));
 
@@ -37,7 +41,6 @@ export default function NavBar() {
   } else {
     nextIndex = 1;
     prevIndex = navDeck.length - 1;
-    console.log(navDeck.length);
   }
 
   if (nextIndex == navDeck.length) {

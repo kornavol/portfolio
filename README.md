@@ -1,27 +1,21 @@
 ## Links
 
-<https://andreas-kornblum.herokuapp.com>
+<https://andreas-kornblum.herokuapp.com> </br>
 <https://kornavol.github.io/portfolio/>
 
 ## Description
 
-### Stack
-
-React, Bootstrap, Redux
-
 ### Packages
 
-- react-icons
-- aos
-- react-redux
-- redux
+react-icons, aos, react-redux, redux
 
 ## To-Do
 
-- Переход осуществляется когда страница было проскроленна до конца + один wheel
+<del> - Переход осуществляется когда страница было проскроленна до конца + один wheel</del>
 
 ### Menu
 
+- change hrev o Navlink and save styles
 - transition animation for ver-nav
 - highlight item of current page
 
@@ -32,7 +26,7 @@ React, Bootstrap, Redux
 
 ## Skills
 
-- change to drag version
+- change to drag version (optional)
 
 ## Issues
 
@@ -40,10 +34,15 @@ React, Bootstrap, Redux
 
 ## Bugs
 
-- prevent navigation scroling if pop-up window is activ
+- prevent navigation scrolling if pop-up window is active
+- the pass started with /porfolio if I'm using router components
+- How to use React routing instead window.location.replace
 
 ## Testing
 
 Needs to test scroll navigation on:
 
--
+## Questions
+
+- Ask Buelent. Is it possible to listen a variable (getter, setter)
+- How to implement useHistory instead window.location.replace

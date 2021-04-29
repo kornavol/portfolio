@@ -1,4 +1,5 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Skills.css";
 import bootstrap from "../../assets/skill-icons/bootstrap.png";
@@ -10,8 +11,9 @@ import react from "../../assets/skill-icons/react.png";
 import saas from "../../assets/skill-icons/saas.png";
 
 import Skill from "../../components/Skill";
+import { transHight } from "../../actions";
 
-const Skills = ({elemHeight, parentStateUpd}) => {
+const Skills = ({ el }) => {
   const skillsArr = [
     {
       title: "HTML",
@@ -55,10 +57,11 @@ const Skills = ({elemHeight, parentStateUpd}) => {
     },
   ];
 
-  useEffect(() => {
-    parentStateUpd();
-  });
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(transHight(el.current.clientHeight));
+  });
 
   /*TO-DO.  Scratch, needs be changd */
   /* Rendering skills and logic selector  */
@@ -73,7 +76,7 @@ const Skills = ({elemHeight, parentStateUpd}) => {
   }
 
   return (
-    <section ref={elemHeight}  id="skills" className="skills">
+    <section ref={el} id="skills" className="skills">
       <div className="container">
         <h2 className="text-uppercase text-center text-secondary">skills</h2>
         {/* <hr className="star-dark mb-5" /> */}

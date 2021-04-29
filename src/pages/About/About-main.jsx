@@ -1,15 +1,21 @@
 import { React, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./About.css";
 
-const About = ({ elemHeight, parentStateUpd }) => {
+import { transHight } from "../../actions";
+
+const About = ({ el }) => {
+  const dispatch = useDispatch();
+
+  console.dir(el);
 
   useEffect(() => {
-    parentStateUpd();
+    dispatch(transHight(el.current.clientHeight));
   });
 
   return (
-    <section ref={elemHeight} className="text-white mb-0" id="about">
+    <section ref={el} className="text-white mb-0" id="about">
       <div className="container">
         <h2 className="text-uppercase text-center text-white mb-5">About</h2>
         {/* <hr className="star-light mb-5" /> */}

@@ -1,29 +1,28 @@
 import { React, useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
 
 import "./NavBarHor.css";
 import { FaBars } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 
 const NavBarver = () => {
-
-  const [sidebar, setSidebar] = useState(
-    false
-  ); /* conditianal renderin class which shows a hides menu items */
+  const [sidebar, setSidebar] = useState(false); // conditianal renderin class which shows a hides menu items
 
   /* renderin menu */
   const navArr = useSelector((state) => state.nav);
   const navDeck = [...navArr];
   const navItems = navDeck.map((item) => (
     <li key={item} className="nav-item mx-0 mx-lg-1 ">
-      <a
-        className="nav-link py-3 px-0 px-lg-3 rounded  text-white text-uppercase"
-        href={"/" + item}
-      >
-        {item}
-      </a>
+      <div className="nav-link py-3 px-0 px-lg-3 rounded text-uppercase">
+        <Link to={"/" + item} onClick={() => setSidebar(false)}>
+          {item}
+        </Link>
+      </div>
     </li>
   ));
+
+  console.log(navItems);
 
   return (
     <nav

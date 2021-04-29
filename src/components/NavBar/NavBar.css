@@ -42,22 +42,22 @@ li.vnav-li {
   /* margin-top: 10px; */
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-top: 1px solid grey;
-  border-bottom: 1px solid grey;
+  /* border-top: 1px solid grey;
+  border-bottom: 1px solid grey; */
   padding-right: 10px;
   border-style: none;
   font-size: 30px;
   border-style: none;
 }
 
-a.vnav-link {
+.vnav-link a {
   color: #2c3e50;;
   font-size: 17px;
 }
 
-a.active-link.vnav-link {
+/* a.active-link.vnav-link {
   color: white;
-}
+} */
 
 /* li.vnav-li:HOVER {
   box-shadow: 1px 1px 6px;

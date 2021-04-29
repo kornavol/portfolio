@@ -7,16 +7,16 @@ import { FaGithub, FaLinkedinIn, FaXing } from "react-icons/fa";
 
 import { transHight } from "../../actions";
 
-const Home = ({ el }) => {
-  const dispatch = useDispatch();
+const Home = ({ elemHeight, parentStateUpd }) => {
+  
 
   useEffect(() => {
-    dispatch(transHight(el.current.clientHeight));
+    parentStateUpd();
   });
 
   return (
     <section
-      ref={el}
+      ref={elemHeight}
       id="home"
       className="text-center text-white masthead"
     >

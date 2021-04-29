@@ -17,10 +17,11 @@ import { toBelowPage, toUpperPage } from "./actions";
 
 function App() {
   const dispatch = useDispatch();
-  const el = useRef(null); //reference to each section in order to get a rendered height
+  const elemHeight = useRef(-10); //reference to each section in order to get a rendered height
 
-  let scrollTopRef = useRef(-1); // we can use everyting instead UNDEFINED. 
-  
+  let scrollTopRef = useRef(-1); // we can use everyting instead UNDEFINED.
+  let scrollDownRef = useRef(false);
+
   const getHight = useSelector((state) => state.sectionSelector); // getting height of current section
 
   /* This aphorism is necessary, because I can get current height only after rendering and for applying, needs update state */
@@ -36,17 +37,22 @@ function App() {
     });
   }, []);
 
+  const fromChildChg = () => {
+    setTimeout(() => {
+      setCompHeight(elemHeight.current.clientHeight);
+      console.log("elemHeight", elemHeight.current.clientHeight);
+    }, 100);
+  };
+
   useEffect(() => {
     window.addEventListener("resize", changeHeight);
+
     if (compHeight > winHeight) {
       window.addEventListener("scroll", onScroll);
       window.addEventListener("wheel", onWheelTop);
     } else {
       window.addEventListener("wheel", onWheel);
     }
-
-    changeHeight();
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("wheel", onWheel);
@@ -55,7 +61,7 @@ function App() {
 
       // scrollTop = undefined;
     };
-  }, [compHeight]);
+  });
 
   function onWheel(e) {
     if (e.deltaY < 0) {
@@ -71,41 +77,39 @@ function App() {
     }
   }
 
-  function test(e) {
+  function onScroll(e) {
     let element = e.target.lastChild;
-    scrollTopRef.current = element.scrollTop;
-    console.log("from ref", scrollTopRef);
-  }
+    // console.log("on Scroll is activ");
 
-  async function onScroll(e) {
-    let element = e.target.lastChild;
-    // await setScrollTop('success');
-    // console.log('from state', scrollTop);
-
-    // scrollTopRef.current = element.scrollTop
-    // console.log('from ref', scrollTopRef);
-
-    await test(e);
+    scrollTopRef.current = element.scrollTop; //  to fire a "onWheelTop" when scrollbar on a top, because in this case scroll event doesn't registred
 
     /* default formula to understand that page on a bottom over scrolling */
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      setTimeout(() => {
-        dispatch(toBelowPage());
-      }, 300);
+    /* 
+    Needs to use this condition becouse scrollTop measured as sloat nubmer and a  calculation creates a diapason 
+    "Math.floor" could't fix
+    */
+    if (
+      element.scrollHeight - element.scrollTop >= element.clientHeight - 1 &&
+      element.scrollHeight - element.scrollTop <= element.clientHeight + 1
+    ) {
+      scrollDownRef.current = true;
     }
     if (element.scrollTop === 0) {
-      console.log("on top");
-      setTimeout(() => {
-        dispatch(toUpperPage());
-      }, 300);
+      scrollTopRef.current = -1;
     }
   }
 
-
+  /*  mounitng with onScroll and makes a transfer ot next page. It works because I wanted to transfer after a second wheel turn during scroling   */
   function onWheelTop(e) {
+    // console.log('second onWheel is activ');
     if (scrollTopRef.current == -1 && e.deltaY < 0) {
       setTimeout(() => {
         dispatch(toUpperPage());
+      }, 300);
+      console.log(e.deltaY);
+    } else if (scrollDownRef.current && e.deltaY > 0) {
+      setTimeout(() => {
+        dispatch(toBelowPage());
       }, 300);
     }
   }
@@ -117,22 +121,22 @@ function App() {
         <NavBarHor />
         <Switch>
           <Route path="/home">
-            <Home el={el} />
+            <Home elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
           <Route path="/about">
-            <About el={el} />
+            <About elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
           <Route path="/skills">
-            <Skills el={el} />
+            <Skills elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
           <Route path="/projects">
-            <Portfolio el={el} />
+            <Portfolio elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
           <Route path="/contact">
-            <Contacts el={el} />
+            <Contacts elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
           <Route path="/">
-            <Home el={el} />
+            <Home elemHeight={elemHeight} parentStateUpd={fromChildChg} />
           </Route>
         </Switch>
       </Router>

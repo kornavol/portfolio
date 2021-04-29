@@ -1,22 +1,16 @@
 import { React, useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import "./Contacts.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { transHight } from "../../actions";
-
-const Contact = ({ el }) => {
-  
-  const dispatch = useDispatch();
-
+const Contact = ({ elemHeight, parentStateUpd }) => {
   useEffect(() => {
-    dispatch(transHight(el.current.clientHeight));
+    parentStateUpd();
   });
 
   return (
-    <section ref={el} id="contact">
+    <section ref={elemHeight} id="contact">
       <div className="container">
         <h2 className="text-uppercase text-center text-secondary mb-0">
           Contact Me

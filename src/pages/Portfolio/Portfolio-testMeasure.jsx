@@ -1,4 +1,5 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect, useRef, useCallback } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Portfolio.css";
 import cabin from "../../assets/portfolio/cabin.png";
@@ -10,8 +11,9 @@ import submarine from "../../assets/portfolio/submarine.png";
 
 import Project from "../../components/Portfolio/Project.jsx";
 import ProjectPage from "../../components/Portfolio/ProjectPage.jsx";
+import { transHight } from "../../actions";
 
-const Portfolio = ({ elemHeight, parentStateUpd }) => {
+const Portfolio = () => {
   const portfolioDB = [
     {
       id: 1,
@@ -69,19 +71,39 @@ const Portfolio = ({ elemHeight, parentStateUpd }) => {
     },
   ];
 
-  const [selector, setSelector] = useState("all");
-  const [prjPage, setPrjPage] = useState(null);
+  // const el=useRef('initial')
+
+  // const dispatch = useDispatch();
 
   useEffect(() => {
-    parentStateUpd();
+    console.log(height);
+    // console.log('height', el.current.clientHeight);  
+  }, );
 
-    /* only for testing. Why it's not log whrn page is loading first time */
-    // window.addEventListener("load", (event) => {
-    //   console.log("DOM fully loaded and parsed");
-    //   console.log(event);
-    //   console.log("el", el.current.clientHeight);
-    // });
-  });
+  // console.log(el.current.clientHeight);
+  
+
+  const [height, setHeight] = useState(0);
+  // console.log(height);
+
+  const measuredRef = useCallback(node => {
+    console.log(node.clientHeight);
+    if (node !== null) {
+    
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
+
+  
+  
+  
+
+  // useEffect(() => {
+  //   dispatch(transHight(el.current.clientHeight));
+  // });
+
+  const [selector, setSelector] = useState("all");
+  const [prjPage, setPrjPage] = useState(null);
 
   /*TO-DO.  
   Scratch, needs be changed
@@ -111,9 +133,9 @@ const Portfolio = ({ elemHeight, parentStateUpd }) => {
   }
 
   return (
-    /* why I see wrong amount of ref in section. TO-DO. Describe */
+    /* why I see wrong amount of ref in section */
     <section
-      ref={elemHeight}
+      ref={measuredRef}
       id="portfolio"
       className="portfolio"
       onScroll={() => console.log("scroll")}
