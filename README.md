@@ -1,13 +1,15 @@
 ## Links
 
-<https://andreas-kornblum.herokuapp.com>
+<https://andreas-kornblum.herokuapp.com>;
 <https://kornavol.github.io/portfolio/>
 
 ## Description
 
-### Stack
+### Version
 
-React, Bootstrap, Redux
+- UseRef as reference to am element whish is measuring
+- height of elelement whitch transfer through redux from current page to App
+- Wrong hight of element only in chrome
 
 ### Packages
 
