@@ -5,17 +5,11 @@
 
 ## Description
 
-### Stack
-
-React, Bootstrap, Redux
 
 ### Packages
 
-- react-icons
-- aos
-- react-redux
-- redux
-
+- react-icons, aos, react-redux, redux, 
+- 
 ## To-Do
 
 - Переход осуществляется когда страница было проскроленна до конца + один wheel
