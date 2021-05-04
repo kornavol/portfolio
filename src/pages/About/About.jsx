@@ -1,11 +1,14 @@
-import { React, useEffect } from "react";
-
 import "./About.css";
 
+import { React, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const About = ({ elemHeight, parentStateUpd }) => {
+  let location = useLocation();
+  location = location.pathname.substring(1);
 
   useEffect(() => {
-    parentStateUpd();
+    parentStateUpd(location);
   });
 
   return (

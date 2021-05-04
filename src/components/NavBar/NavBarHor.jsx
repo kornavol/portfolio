@@ -21,9 +21,6 @@ const NavBarver = () => {
       </div>
     </li>
   ));
-
-  console.log(navItems);
-
   return (
     <nav
       id="hor-nav"

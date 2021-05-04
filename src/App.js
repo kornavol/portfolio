@@ -4,7 +4,8 @@ import AOS from "aos";
 
 import { useRef, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Home from "./pages/Home/Home.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -13,10 +14,13 @@ import About from "./pages/About/About.jsx";
 import Skills from "./pages/Skills/Skills.jsx";
 import Portfolio from "./pages/Portfolio/Portfolio.jsx";
 import Contacts from "./components/Contacts/Contacts.jsx";
-import { toBelowPage, toUpperPage } from "./actions";
 
 function App() {
-  const dispatch = useDispatch();
+  const [compUpdate, setCompUpdate] = useState("");
+
+  let history = useHistory();
+
+  const nextPage = useSelector((state) => state.currPage);
 
   const elemHeight = useRef(-10); //reference to each section in order to get a rendered height
 
@@ -27,10 +31,17 @@ function App() {
   const [compHeight, setCompHeight] = useState(undefined);
   const winHeight = window.innerHeight;
 
-  function fromChildChg() {
+  async function moveToNextPage(pass) {
+    // console.log(history);
+    await history.push("/" + pass);
+  }
+
+  function fromChildChng(location = "undef") {
     setTimeout(() => {
       setCompHeight(elemHeight.current.clientHeight);
-      console.log("elemHeight", elemHeight.current.clientHeight);
+      setCompUpdate(location);
+      console.log("winheight, elemHeight",winHeight,elemHeight.current.clientHeight);
+      console.log(location);
     }, 100);
   }
 
@@ -39,16 +50,19 @@ function App() {
   }
 
   function onWheel(e) {
+    console.log("onWhell");
     if (e.deltaY < 0) {
-      console.log(e.deltaY, "up");
+      // console.log(e.deltaY, "up");
       setTimeout(() => {
-        dispatch(toUpperPage());
+        moveToNextPage(nextPage.upper);
       }, 300);
     } else {
-      console.log(e.deltaY, "down");
+      // console.log(e.deltaY, "down");
       setTimeout(() => {
-        dispatch(toBelowPage());
+        moveToNextPage(nextPage.below);
       }, 300);
+
+      // console.log(nextPage);
     }
   }
 
@@ -76,15 +90,15 @@ function App() {
 
   /*  mounitng with onScroll and makes a transfer ot next page. It works because I wanted to transfer after a second wheel turn during scroling   */
   function onWheelWthScroll(e) {
-    // console.log('second onWheel is activ');
+    console.log("second onWheel is activ");
     if (scrollTopRef.current == -1 && e.deltaY < 0) {
       setTimeout(() => {
-        dispatch(toUpperPage());
+        moveToNextPage(nextPage.upper);
       }, 300);
       console.log(e.deltaY);
     } else if (scrollDownRef.current && e.deltaY > 0) {
       setTimeout(() => {
-        dispatch(toBelowPage());
+        moveToNextPage(nextPage.below);
       }, 300);
     }
   }
@@ -97,6 +111,8 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("from useEff");
+
     window.addEventListener("resize", changeHeight);
 
     if (compHeight > winHeight) {
@@ -108,39 +124,35 @@ function App() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", changeHeight);
       window.removeEventListener("wheel", onWheelWthScroll);
-
-      // scrollTop = undefined;
     };
   });
 
   return (
     <div>
-      <Router basename={process.env.PUBLIC_URL}>
-        <NavBar />
-        <NavBarHor />
-        <Switch>
-          <Route path="/home">
-            <Home elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-          <Route path="/about">
-            <About elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-          <Route path="/skills">
-            <Skills elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-          <Route path="/projects">
-            <Portfolio elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-          <Route path="/contact">
-            <Contacts elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-          <Route path="/">
-            <Home elemHeight={elemHeight} parentStateUpd={fromChildChg} />
-          </Route>
-        </Switch>
-      </Router>
+      <NavBar />
+      <NavBarHor />
+
+      <Switch>
+        <Route path="/home">
+          <Home elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+        <Route path="/about">
+          <About elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+        <Route path="/skills">
+          <Skills elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+        <Route path="/projects">
+          <Portfolio elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+        <Route path="/contact">
+          <Contacts elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+        <Route path="/">
+          <Home elemHeight={elemHeight} parentStateUpd={fromChildChng} />
+        </Route>
+      </Switch>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Link, useLocation } from "react-router-dom";
 
 import "./NavBar.css";
-import AOS from "aos";
 
 import { belowPage } from "../../actions";
 
@@ -16,11 +15,9 @@ export default function NavBar() {
   const navItems = navDeck.map((item) => (
     <li key={item} className="vnav-li">
       <div className="vnav-link">
-        <NavLink  to={"/" + item} >
-          {item}
-        </NavLink>
+        <NavLink to={"/" + item}>{item}</NavLink>
       </div>
-{/* 
+      {/* 
       //  <a className="vnav-link" href={"/" + item}>
       //     {item}
       //   </a> */}

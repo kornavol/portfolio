@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore } from 'redux';
+import { BrowserRouter as Router} from "react-router-dom";
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,15 +12,15 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import allReducers from './reducer';
 
-
 const store = createStore(allReducers);
-
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router basename={process.env.PUBLIC_URL}>
     <Provider store = {store}>
     <App />
     </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

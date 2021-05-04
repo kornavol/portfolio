@@ -1,5 +1,3 @@
-import { React, useState, useEffect} from "react";
-
 import "./Portfolio.css";
 import cabin from "../../assets/portfolio/cabin.png";
 import cake from "../../assets/portfolio/cake.png";
@@ -7,6 +5,9 @@ import circus from "../../assets/portfolio/circus.png";
 import game from "../../assets/portfolio/game.png";
 import safe from "../../assets/portfolio/safe.png";
 import submarine from "../../assets/portfolio/submarine.png";
+
+import { React, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import Project from "../../components/Portfolio/Project.jsx";
 import ProjectPage from "../../components/Portfolio/ProjectPage.jsx";
@@ -72,15 +73,11 @@ const Portfolio = ({ elemHeight, parentStateUpd }) => {
   const [selector, setSelector] = useState("all");
   const [prjPage, setPrjPage] = useState(null);
 
-  useEffect(() => {
-    parentStateUpd();
+  let location = useLocation();
+  location = location.pathname.substring(1);
 
-    /* only for testing. Why it's not log whrn page is loading first time */
-    // window.addEventListener("load", (event) => {
-    //   console.log("DOM fully loaded and parsed");
-    //   console.log(event);
-    //   console.log("el", el.current.clientHeight);
-    // });
+  useEffect(() => {
+    parentStateUpd(location);
   });
 
   /*TO-DO.  

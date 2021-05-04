@@ -1,12 +1,16 @@
-import { React, useEffect } from "react";
-
 import "./Contacts.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import { React, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const Contact = ({ elemHeight, parentStateUpd }) => {
+  let location = useLocation();
+  location = location.pathname.substring(1);
+
   useEffect(() => {
-    parentStateUpd();
+    parentStateUpd(location);
   });
 
   return (

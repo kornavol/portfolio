@@ -1,8 +1,9 @@
-export const belowPage = (prev, next) => {
+export const belowPage = (prev, next, history) => {
     return {
         type:'BELOW-PAGE',
         upperPage:prev,
-        belowPage:next
+        belowPage:next, 
+        history:history
     }
 }
 
@@ -24,4 +25,3 @@ export const transHight = (height) => {
         height:height
     }
 }
-

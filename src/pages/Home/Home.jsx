@@ -1,17 +1,16 @@
-import { React, useEffect } from "react";
-import { useDispatch } from "react-redux";
-
 import "./Home.css";
 import avatar from "../../assets/avatar.png";
 import { FaGithub, FaLinkedinIn, FaXing } from "react-icons/fa";
 
-import { transHight } from "../../actions";
+import { React, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Home = ({ elemHeight, parentStateUpd }) => {
-  
+  let location = useLocation();
+  location = location.pathname.substring(1)
 
   useEffect(() => {
-    parentStateUpd();
+    parentStateUpd(location);
   });
 
   return (

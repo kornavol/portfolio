@@ -1,5 +1,3 @@
-import { React, useState, useEffect} from "react";
-
 import "./Skills.css";
 import bootstrap from "../../assets/skill-icons/bootstrap.png";
 import css from "../../assets/skill-icons/css.png";
@@ -8,6 +6,9 @@ import js from "../../assets/skill-icons/js.png";
 import node from "../../assets/skill-icons/node.png";
 import react from "../../assets/skill-icons/react.png";
 import saas from "../../assets/skill-icons/saas.png";
+
+import { React, useState, useEffect} from "react";
+import { useLocation } from "react-router-dom";
 
 import Skill from "../../components/Skill";
 
@@ -55,10 +56,12 @@ const Skills = ({elemHeight, parentStateUpd}) => {
     },
   ];
 
-  useEffect(() => {
-    parentStateUpd();
-  });
+  let location = useLocation();
+  location = location.pathname.substring(1)
 
+  useEffect(() => {
+    parentStateUpd(location);
+  });
 
   /*TO-DO.  Scratch, needs be changd */
   /* Rendering skills and logic selector  */
