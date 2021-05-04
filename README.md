@@ -12,17 +12,19 @@ react-icons, aos, react-redux, redux
 ## To-Do
 
 <del> - Переход осуществляется когда страница было проскроленна до конца + один wheel</del>
+<del>Prevent a transition to a wrong page (one or couple more) on a wheel event</del>
 
 ### Menu
 
-- change hrev o Navlink and save styles
+<del> change hrev o Navlink and save styles</del>
+
 - transition animation for ver-nav
 - highlight item of current page
 
 ### Navigation
 
-- add transition on scroll-up
-- Переход осуществляется когда страница было проскроленна до конца + один wheel
+<del>add transition on scroll-up</del>
+<del>Переход осуществляется когда страница было проскроленна до конца + один wheel</del>
 
 ## Skills
 
@@ -35,7 +37,7 @@ react-icons, aos, react-redux, redux
 ## Bugs
 
 - prevent navigation scrolling if pop-up window is active
-- the pass started with /porfolio if I'm using router components
+- the pass started with /portfolio if I'm using router components
 - How to use React routing instead window.location.replace
 
 ## Testing
@@ -43,6 +45,3 @@ react-icons, aos, react-redux, redux
 Needs to test scroll navigation on:
 
 ## Questions
-
-- Ask Buelent. Is it possible to listen a variable (getter, setter)
-- How to implement useHistory instead window.location.replace

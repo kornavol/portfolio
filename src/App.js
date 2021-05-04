@@ -25,23 +25,29 @@ function App() {
   const elemHeight = useRef(-10); //reference to each section in order to get a rendered height
 
   let scrollTopRef = useRef(-1); // we can use everyting instead UNDEFINED.
-  let scrollDownRef = useRef(false);
+  let scrollDownRef = false; // to allow onWheel action open next page
+
+  /* To provent transport to one more page on wheel scrolling*/
+  let wheelCont = 0;
 
   /* This aphorism is necessary, because I can get current height only after rendering and for applying, needs update state */
   const [compHeight, setCompHeight] = useState(undefined);
   const winHeight = window.innerHeight;
 
-  async function moveToNextPage(pass) {
-    // console.log(history);
-    await history.push("/" + pass);
+  function moveToNextPage(pass) {
+    history.push("/" + pass);
   }
 
   function fromChildChng(location = "undef") {
     setTimeout(() => {
       setCompHeight(elemHeight.current.clientHeight);
       setCompUpdate(location);
-      console.log("winheight, elemHeight",winHeight,elemHeight.current.clientHeight);
-      console.log(location);
+      // console.log(
+      //   "winheight, elemHeight",
+      //   winHeight,
+      //   elemHeight.current.clientHeight
+      // );
+      // console.log(location);
     }, 100);
   }
 
@@ -50,19 +56,23 @@ function App() {
   }
 
   function onWheel(e) {
-    console.log("onWhell");
-    if (e.deltaY < 0) {
-      // console.log(e.deltaY, "up");
-      setTimeout(() => {
-        moveToNextPage(nextPage.upper);
-      }, 300);
-    } else {
-      // console.log(e.deltaY, "down");
-      setTimeout(() => {
-        moveToNextPage(nextPage.below);
-      }, 300);
+    if (wheelCont === 0) {
+      // console.log("onWheel");
+      if (e.deltaY < 0) {
+        // console.log(e.deltaY, "up");
+        wheelCont += 1;
+        setTimeout(() => {
+          moveToNextPage(nextPage.upper);
+        }, 300);
+      } else {
+        // console.log(e.deltaY, "down");
+        wheelCont += 1;
+        setTimeout(() => {
+          moveToNextPage(nextPage.below);
+        }, 300);
 
-      // console.log(nextPage);
+        // console.log(nextPage);
+      }
     }
   }
 
@@ -81,7 +91,7 @@ function App() {
       element.scrollHeight - element.scrollTop >= element.clientHeight - 1 &&
       element.scrollHeight - element.scrollTop <= element.clientHeight + 1
     ) {
-      scrollDownRef.current = true;
+      scrollDownRef = true;
     }
     if (element.scrollTop === 0) {
       scrollTopRef.current = -1;
@@ -90,16 +100,20 @@ function App() {
 
   /*  mounitng with onScroll and makes a transfer ot next page. It works because I wanted to transfer after a second wheel turn during scroling   */
   function onWheelWthScroll(e) {
-    console.log("second onWheel is activ");
-    if (scrollTopRef.current == -1 && e.deltaY < 0) {
-      setTimeout(() => {
-        moveToNextPage(nextPage.upper);
-      }, 300);
-      console.log(e.deltaY);
-    } else if (scrollDownRef.current && e.deltaY > 0) {
-      setTimeout(() => {
-        moveToNextPage(nextPage.below);
-      }, 300);
+    // console.log("second onWheel is activ");
+
+    if (wheelCont === 0) {
+      if (scrollTopRef.current == -1 && e.deltaY < 0) {
+        wheelCont += 1;
+        setTimeout(() => {
+          moveToNextPage(nextPage.upper);
+        }, 300);
+      } else if (scrollDownRef && e.deltaY > 0) {
+        wheelCont += 1;
+        setTimeout(() => {
+          moveToNextPage(nextPage.below);
+        }, 300);
+      }
     }
   }
 
@@ -111,7 +125,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("from useEff");
+    // console.log("from useEff");
 
     window.addEventListener("resize", changeHeight);
 
