@@ -32,7 +32,7 @@ react-icons, aos, react-redux, redux
 
 ## Issues
 
-- don't see bottom margin of hor-nav on mobile device
+<del>don't see bottom margin of hor-nav on mobile device</del>
 
 ## Bugs
 
